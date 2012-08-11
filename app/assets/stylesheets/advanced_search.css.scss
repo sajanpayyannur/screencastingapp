@@ -1,0 +1,8 @@
+// Place all the styles related to the advanced_search controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.pagination{
+  span, em, a {display: inline-block; float: left}
+  span, em{padding: 5px}
+  .clear{clear: both;}
+}

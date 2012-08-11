@@ -1,0 +1,2 @@
+module Admin::SliderItemsHelper
+end

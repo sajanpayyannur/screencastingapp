@@ -1,0 +1,52 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#pwe-app{
+  #home.home-index{
+    ul li .caption h5{
+      text-align: center;
+    }
+  }
+
+#home #auction-slider {
+    li {
+      height: 280px;
+
+	  .wrapper {
+	    border: 1px solid #c0c0c0;
+	    border-radius: 15px;
+	    -moz-border-radius: 15px;
+	    -webkit-border-radius: 15px;
+		padding: 20px;
+	  }
+
+	    p {
+	      margin-top: 10px;
+	      margin-bottom: 0;
+	    }
+
+      .image {
+        float: left;
+        height: 210px;
+      }
+
+      .info {
+        float: left;
+        display: block;
+        width: 350px;
+		margin-left: 20px;
+      }
+    }
+
+  }
+}
+
+.search p {
+  margin: 0;
+}
+
+.search td {
+  padding:10px 0;
+  margin: 10px 0;
+
+}

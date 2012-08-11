@@ -1,0 +1,19 @@
+
+%h1 Complete your registration
+
+%p You need to pay a $129 fee to complete registration.
+
+- if @payment.errors.any?
+  #error_explanation
+    %ul
+      - @payment.errors.full_messages.each do |msg|
+        %li= msg
+
+= simple_form_for @payment, :url => create_setup_fee_payment_payments_url, :method => :post do |f|
+  = f.input :first_name
+  = f.input :last_name
+  = f.input :card_number
+  = f.input :card_verification, as: :string
+  = f.date_select :card_expires_on, :discard_day => true,
+        :start_year => Date.today.year, :end_year => (Date.today.year + 10), :order => [:month, :year]
+  = f.button :submit

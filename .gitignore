@@ -1,0 +1,10 @@
+*.sw?
+config/database.yml
+*.sqlite3
+*.log
+tmp/
+.rvmrc
+.swo
+
+.DS_STORE
+*~

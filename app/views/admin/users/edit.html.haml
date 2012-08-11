@@ -1,0 +1,41 @@
+.devise
+  %h2
+    Edit User
+  = simple_form_for([:admin, @user], :url => admin_user_path(@user), :html => { :method => :put }) do |f|
+    %div
+      = f.label :email, "Email"
+      %br/
+      = f.email_field :email
+    %div
+      = f.label :name, "Name"
+      %br/
+      = f.text_field :name
+    %div
+      = f.label :nickname, "Nickname"
+      %br/
+      = f.text_field :nickname
+    %div
+      = f.label :description, "Descrição"
+      %br/
+      = f.text_area :description, :rows => 5
+    %div
+      = f.label :phone_number, "Phone Number"
+      %br/
+      = f.text_field :phone_number
+    %div
+      = f.label :address, "Address"
+      %br/
+      = f.text_field :address
+    %div
+      = f.label :city, "City"
+      %br/
+      = f.text_field :city
+    %div
+      = f.label :zip, "Zip"
+      %br/
+      = f.text_field :zip
+    %div
+      = f.association :state
+    %div
+      = f.submit "Save", :class => 'btn btn-primary'
+      = link_to "Back", :back, :class => "btn"

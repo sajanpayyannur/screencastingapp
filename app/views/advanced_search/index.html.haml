@@ -1,0 +1,16 @@
+.well
+  %h1 Advanced Searches
+  = link_to "New search", new_advanced_search_path, :class => "btn"
+
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %td Search
+      %td Created at
+  %tbody
+    - @advanced_searches.each do |search|
+      %tr
+        %td= link_to search.to_s, advanced_search_path(search)
+        %td= l search.created_at, :format => :long
+        %td= link_to "Delete", advanced_search_path(search), :method => :delete, :confirm => "Are you sure?"
+

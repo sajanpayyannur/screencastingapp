@@ -1,0 +1,12 @@
+.well
+  %h1= @advanced_search.title
+  - if user_signed_in? && @advanced_search.user == current_user
+    = link_to "Back to searches", advanced_search_index_path, :class => "btn btn-mini"
+    = link_to "Fix on side menu", fix_on_side_menu_advanced_search_path(@advanced_search), :class => "btn btn-mini"
+    %br
+    Share url: <strong>#{advanced_search_url(@advanced_search.slug)}</strong>
+= will_paginate @auctions
+%br.clear
+%br
+= render 'auctions/auctions'
+= will_paginate @auctions

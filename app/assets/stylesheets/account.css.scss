@@ -1,0 +1,13 @@
+// Place all the styles related to the Account controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#account-nav{
+  border-bottom: 1px solid #ccc;
+  li{
+    display: inline-block;
+    &:first-child{border-right: 1px solid #ccc}
+    a{
+      padding: 0 10px;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+= simple_form_for @admin_menu_entry do |f|
+  -if @admin_menu_entry.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@admin_menu_entry.errors.count, "error")} prohibited this admin_menu_entry from being saved:"
+      %ul
+        - @admin_menu_entry.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.input :title
+  .field
+    = f.input :order
+  .field
+    = f.association :admin_page
+  .actions
+    = f.submit 'Save'

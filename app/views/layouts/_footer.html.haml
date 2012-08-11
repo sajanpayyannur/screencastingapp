@@ -1,0 +1,15 @@
+#footer-wrapper.container
+  %footer#footer.row
+    .span9
+      .row
+        / Links
+        %section
+          %ul.link-list
+            - @links.each do |link|
+              %li
+                = link_to link.text, link.url
+
+    .span3
+      / Blurb
+      %section
+        = @footer_block.text.html_safe if @footer_block.respond_to? :text

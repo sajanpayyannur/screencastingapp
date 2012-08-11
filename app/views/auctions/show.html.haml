@@ -1,0 +1,93 @@
+.row
+  .span6
+
+    / Start Gallery Html Containers
+    #gallery.content
+      #slideshow.slideshow
+    #navigation.navigation
+      %ul.thumbs.noscript
+        - 8.times do |i|
+          %li
+            %a{:href => "#{all_large @auction.picture_url, i+1}", :original => "#{all_large @auction.picture_url, i+1}"}
+              %img{:src => "#{all_thumbs @auction.picture_url, i+1}"}/
+
+
+  .desc
+    = render "partials/add_this"
+    %h2= @auction.pretty_title
+    - if user_signed_in? && !current_user.watching?(@auction)
+      =link_to "Add to Watch List", watch_auction_watch_list_path(@auction.id), :remote => true, :id => "watch_list_link"
+  %br
+  .span2
+    %dl
+      %dt Year:
+      %dd= @auction.year
+
+      %dt Make:
+      %dd= @auction.mark
+
+      %dt Model:
+      %dd= @auction.model
+
+      %dt Color:
+      %dd= @auction.color
+
+      %dt Body Style:
+      %dd= @auction.body_style
+
+      %dt Mileage:
+      %dd= @auction.mileage
+
+      %dt VIN:
+      %dd= hide_lasts @auction.vin
+
+    %dl
+      %dt Damage:
+      %dd= @auction.damage_description
+
+      %dt Repair cost:
+      %dd= number_to_currency @auction.price
+
+      %dt Location (State):
+      %dd= @auction.state
+
+      %dt Lot Number:
+      %dd= @auction.lot_number
+
+      %dt Sale Title Type:
+      %dd= @auction.sale_title_type
+
+
+  .span4
+    %dl
+      %dt End date:
+      %dd= l @auction.end_date, :format => :custom_auction
+
+      %dt Bids on InternetAutoAuctions.com:
+      %dd= @auction.bids.count
+
+
+      %dt Current Highest bid:
+      %dd= number_to_currency (@auction.max_bid_value || @auction.high_bid)
+
+  .bid-buttons
+    - if current_user
+      = render 'bids/form'
+    - else
+      = link_to 'Sign in to Bid', new_user_session_path, :class => 'btn'
+  .span5#final-price-calculator.well
+    %h2 Final Price Calculator
+    %table.table
+      %tbody
+        %tr
+          %td If Final Bid is:
+          %td #{number_to_currency @auction.max_bid_value} USD
+        %tr
+          %td Document Fee:
+          %td $55 USD
+        %tr
+          %td Transaction Fees:
+          %td $199 USD
+        %tr
+          %td Total:
+          %td.bold.blue #{number_to_currency(@auction.max_bid_value + 254)} USD

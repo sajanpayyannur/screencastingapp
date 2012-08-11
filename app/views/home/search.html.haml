@@ -1,0 +1,31 @@
+= will_paginate @auctions
+.row
+  .span9.search
+    %table.table-striped
+      - @auctions.each do |auction|
+        %tr
+          %td.span2
+            = image_tag(auction.picture_url)
+          %td.span3
+            = link_to "#{auction.title}  #{auction.year}", auction_path(auction.slug)
+            %p Color: #{auction.color}
+            %p Body: #{auction.body_style}
+            %p Mileage: #{auction.mileage}
+          %td.span3
+            %p Damage: #{auction.damage_description}
+            %p Sec Damage: #{auction.secundary_damage}
+            %p State: #{auction.title_state}
+            %p Vin: #{hide_lasts(auction.vin)}
+
+          %td.span3
+            - if auction.make_an_offer_eligible == 'Y'
+              %a.btn.btn-success.btn-mini{:href => auction_path(auction.slug)} Make an offer
+
+            - if auction.buy_it_now_price != '.00'
+              %a.btn.btn-success.btn-mini{:href => auction_path(auction.slug)} Buy Now just #{number_to_currency auction.buy_it_now_price}
+
+            %p End: #{auction.end_date.strftime('%d/%m/%y %H:%M')}
+            %p Max bid: #{number_to_currency auction.max_bid_value}
+            = link_to 'Bid now', auction_path(auction.slug), :class => 'btn'
+
+= will_paginate @auctions

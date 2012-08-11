@@ -1,0 +1,34 @@
+.well
+  %h2= @user.name
+  = link_to "← Back to Bids", admin_user_bids_path(@user), :class => 'btn'
+
+%h2 Bid details
+%dl.dlshow
+  %dt Value
+  %dd= number_to_currency @bid.value
+
+  %dt Status
+  %dd= bid_status_tag @bid
+
+%h2 Auction details
+%dl.dlshow
+  %dt Title
+  %dd= @bid.auction.title
+
+  %dt Bids
+  %dd= @bid.auction.bids.count
+
+  %dt Best Bid
+  %dd= number_to_currency @bid.auction.bids.maximum(:value)
+
+  %dt Status
+  %dd= auction_status_tag @bid.auction
+
+  %dt Date
+  %dd= @bid.created_at.strftime("%D")
+
+- if @bid.auction.enabled? && @bid.active?
+  = link_to "Mark as WON", mark_as_won_admin_user_bid_path(@user, @bid), :class => 'btn', :confirm => 'Are  you sure you want to mark this bid as WON?', :method => :post
+  = link_to "Mark as LOST", mark_as_lost_admin_user_bid_path(@user, @bid), :class => 'btn', :confirm => 'Are  you sure you want to mark this bid as LOST?', :method => :post
+
+

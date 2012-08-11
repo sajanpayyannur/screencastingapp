@@ -1,0 +1,59 @@
+!!! 5
+%html{:lang => "en", id: 'pwe-app'}
+  %head
+    %meta{:charset => "utf-8"}/
+    %title= "Internet Auto Auctions" #+ (content_for?(:title) ? yield(:title) : "")
+    = csrf_meta_tags
+    / Le HTML5 shim, for IE6-8 support of HTML elements
+    /[if lt IE 9]
+      = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
+    / Le styles
+    = stylesheet_link_tag "application", :media => "all"
+    / Le fav and touch icons
+    -#%link{:href => "images/favicon.ico", :rel => "shortcut icon"}/
+    = javascript_include_tag "application"
+    :javascript
+      var __lc = {};
+      __lc.license = 1377522;
+
+      (function() {
+        var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;
+        lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
+      })();
+
+  - if user_signed_in?
+    %body{id: "#{body_css_id}", class: "#{app_wrapper_css_class} mt40"}
+  - else
+    %body{id: "#{body_css_id}", class: "#{app_wrapper_css_class}"}
+  / Header
+  #header-wrapper
+    %header#header
+      .container
+        .row
+          .span12
+            = render :partial => "layouts/top_menu"
+  / Content
+  #content-wrapper
+    #content
+      .container
+        .row
+          .span3
+            / Sidebar
+            = render :partial => "layouts/sidebar"
+
+          .span9
+            / Main Content
+            %section.clearfix.main-content
+              - if notice
+                %p.alert.alert-info= notice
+              - if alert
+                %p.alert= alert
+              = content_for?(:content) ? yield(:content) : yield
+
+  / Footer
+  = render 'layouts/footer'
+
+  / Copyright
+  #copyright
+    = @footer_rights_block.text.html_safe if @footer_block.respond_to? :text

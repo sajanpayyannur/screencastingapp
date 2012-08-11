@@ -1,0 +1,59 @@
+.well
+  .row
+    .span3
+      = link_to "← Back to List", admin_auctions_path, :class => 'btn'
+      %br
+      %br
+      %h2= @auction.title
+      %p= @auction.year
+      %p lot number #{@auction.lot_number}
+      = image_tag @auction.picture_url
+    .span3
+      %dl.dlshow
+        %dt Year
+        %dd= @auction.year
+
+        %dt Enabled
+        %dd= @auction.enabled
+
+        %dt Price
+        %dd= number_to_currency @auction.price
+
+        %dt Max bid
+        %dd= number_to_currency @auction.max_bid_value
+    .span3
+      %dl.dlshow
+        %dt End date
+        %dd= l @auction.end_date, :format => :long
+
+        %dt Bids count
+        %dd= @auction.bids.count
+
+        %dt Make
+        %dd= @auction.mark
+
+        %dt Model
+        %dd= @auction.model
+
+- if @auction.winner_bid
+  %h2 Winner bid
+  %dl.dlshow
+    %dt Bidder
+    %dd= link_to @auction.winner_bid.user.email, admin_user_path(@auction.winner_bid.user)
+
+    %dt Value
+    %dd= number_to_currency @auction.winner_bid.value
+
+%h2 Bids
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Bidder
+      %th Value
+      %th Winner
+  %tbody
+    - @auction.bids.each do |bid|
+      %tr
+        %td= link_to bid.user.email, admin_user_path(bid.user)
+        %td= number_to_currency bid.value
+        %td= bid.winner

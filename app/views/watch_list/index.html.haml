@@ -1,0 +1,32 @@
+%h1 My Watch List
+.row
+  .span9.search
+    %table.table-striped
+      - @watch_items.each do |wl|
+        - unless wl.auction.nil?
+          %tr
+            %td.span2
+              = image_tag(wl.auction.picture_url)
+            %td.span3
+              = link_to "#{wl.auction.title}  #{wl.auction.year}", auction_path(wl.auction.slug)
+              %p Color: #{wl.auction.color}
+              %p Body: #{wl.auction.body_style}
+              %p Mileage: #{wl.auction.mileage}
+            %td.span3
+              %p Damage: #{wl.auction.damage_description}
+              %p Sec Damage: #{wl.auction.secundary_damage}
+              %p State: #{wl.auction.title_state}
+              %p Vin: #{hide_lasts(wl.auction.vin)}
+
+            %td.span3
+              - if wl.auction.make_an_offer_eligible == 'Y'
+                %a.btn.btn-success.btn-mini{:href => auction_path(wl.auction.slug)} Make an offer
+
+              - if wl.auction.buy_it_now_price != '.00'
+                %a.btn.btn-success.btn-mini{:href => auction_path(wl.auction.slug)} Buy Now just #{number_to_currency wl.auction.buy_it_now_price}
+
+              %p End: #{wl.auction.end_date.strftime('%d/%m/%y %H:%M')}
+              %p Max bid: #{number_to_currency wl.auction.max_bid_value}
+              = link_to 'Bid now', auction_path(wl.auction.slug), :class => 'btn'
+            %td.span1
+              = link_to "Remove from watch list", watch_list_path(wl), method: :delete, :data => { confirm: 'Are you sure?' }, :class => "btn btn-danger"

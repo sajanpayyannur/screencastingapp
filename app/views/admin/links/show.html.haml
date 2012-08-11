@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Url:
+  = @admin_link.url
+%p
+  %b Text:
+  = @admin_link.text
+
+= link_to 'Edit', edit_admin_link_path(@admin_link)
+\|
+= link_to 'Back', admin_links_path

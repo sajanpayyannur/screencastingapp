@@ -1,0 +1,55 @@
+- if user_signed_in?
+  %section
+    %header
+      %h2 My saved searches
+    %ul
+      - current_user.advanced_searches.where(:fixed => true).each do |search|
+        %li= link_to search.title, advanced_search_path(search.slug)
+
+%section
+  %header
+    %h2 Find a Vehicle
+    = form_tag root_path, :method => :get, :name => "search", :id => :homeSearch do |f|
+      Vehicle type
+      %br
+      %input{:name => "eventId", :type => "hidden", :value => "detailSearch"}
+      %input{:name => "isFromHomePage", :type => "hidden", :value => "1"}
+      %select{:name => "search[kind]", :id => "search_kind", :onchange => "updateMakeDropDown();"}
+        %option{:value => "V"} Automobile
+        %option{:value => "C"} Motorcycle
+        %option{:value => "E"} Industrial Equipment
+        %option{:value => "J"} Jet ski
+        %option{:value => "M"} Boat
+        %option{:value => "R"} Recreational Vehicle
+        %option{:value => "S"} Snowmobile
+        %option{:value => "A"} ATVs
+        %option{:value => "D"} Dirt Bikes
+        %option{:value => "H"} Homeowner's
+        %option{:value => "K"} Medium Duty Trucks
+        %option{:value => "L"} Trailers
+        %option{:value => "U"} Heavy Duty Trucks
+      %br
+      Make
+      %br
+      = select_tag "search[mark]", options_from_collection_for_select(@marks_list, :mark, :mark, @search.try(:mark)), :prompt => "All Makes"
+      %br
+      Model
+      %br
+      = select_tag "search[model]", options_from_collection_for_select(@models_list, :model, :model, @search.try(:model)), :prompt => "All Models"
+      %br
+      Year from
+      %br
+      %select.select2{:name => "search[year_from]", :id => "search_year_from"}
+        = raw (DateTime.current.year + 1).downto(1920).map{|n| content_tag(:option, n.to_s, :value => n, :selected => (n == 2007 ))}.join
+      %br
+      Year to
+      %br
+      %select{:name => "search[year_to]", :id => "search_year_to"}
+        = raw (DateTime.current.year + 1).downto(2007).map{|n| content_tag(:option, n.to_s, :value => n, :selected => (n == 2013 ))}.join
+
+      %br
+      %br
+      = submit_tag "Start Search", :class => 'btn btn-primary'
+
+%section
+  = @sidebar_block.text.html_safe if @sidebar_block.respond_to? :text

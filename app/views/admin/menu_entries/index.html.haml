@@ -1,0 +1,23 @@
+%h1 Listing menu entries
+
+%table.table.table-striped.table-bordered
+  %tr
+    %th Title
+    %th Order
+    %th Admin page
+    %th
+    %th
+    %th
+
+  - @admin_menu_entries.each do |admin_menu_entry|
+    %tr
+      %td= admin_menu_entry.title
+      %td= admin_menu_entry.order
+      %td= admin_menu_entry.admin_page.try(:title)
+      %td= link_to 'Show', admin_menu_entry
+      %td= link_to 'Edit', edit_admin_menu_entry_path(admin_menu_entry)
+      %td= link_to 'Destroy', admin_menu_entry, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Menu entry', new_admin_menu_entry_path

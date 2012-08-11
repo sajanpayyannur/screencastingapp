@@ -1,0 +1,11 @@
+%h1 Slider Item
+
+%p= @admin_slider_item.title
+
+%p= @admin_slider_item.url
+
+%p= @admin_slider_item.image 
+
+= @admin_slider_item.content.html_safe
+
+= link_to 'Back', admin_slider_items_path, :class => 'btn'

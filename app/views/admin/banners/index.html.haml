@@ -1,0 +1,23 @@
+%h1 Banners
+
+%table.table.table-bordered.table-striped
+  %tr
+    %th Image Name
+    %th Position
+    %th Link
+    %th
+    %th
+    %th
+
+  - @admin_banners.each do |item|
+    %tr
+      %th= item.banner_file_name
+      %td= item.position
+      %td= item.link
+      %td= link_to 'Show', admin_banner_path(item)
+      %td= link_to 'Edit', edit_admin_banner_path(item)
+      %td= link_to 'Destroy', admin_banner_path(item), :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Banner', new_admin_banner_path, class: 'btn'

@@ -1,0 +1,11 @@
+development: &development
+  mode: test
+  login: 5AH52qHsHm
+  key: 6T86aBhKk783Y389
+
+production:
+   <<: *development
+
+test:
+   <<: *development
+

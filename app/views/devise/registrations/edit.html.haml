@@ -1,0 +1,47 @@
+.devise.well
+  %h2
+    My profile
+  = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+    = devise_error_messages!
+    .row
+      .span4
+        = f.input :email
+    .row
+      .span4
+        = f.input :name
+      .span4
+        = f.input :nickname
+    .row
+      .span7
+        = f.label :description, "Description"
+        = f.text_area :description, :rows => 6, :class => "span7"
+    -unless resource.authentications.any?
+      .row
+        .span4
+          = f.label :password, "Password"
+          = f.password_field :password, :autocomplete => "off"
+          %br
+          %i (Left blank if you don't want to change)
+        .span4
+          = f.label :password_confirmation, "Password confirmation"
+          = f.password_field :password_confirmation
+    .row
+      .span4
+        = f.input :phone_number
+    .row
+      .span4
+        = f.input :address
+      .span4
+        = f.input :city
+    .row
+      .span4
+        = f.input :zip
+      .span4
+        = f.association :state
+    %br
+    .row
+      .span8
+        = f.submit "Save", :class => 'btn btn-primary'
+        = link_to "Back", :back, :class => "btn"
+  %p
+    Unhappy? #{link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure??", :method => :delete}.

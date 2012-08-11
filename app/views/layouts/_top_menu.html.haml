@@ -1,0 +1,78 @@
+- if user_signed_in?
+  .navbar.navbar-fixed-top
+    .navbar-inner
+      .container
+        %ul.nav.pull-right
+          - if current_user.has_role? 'admin'
+            %li= link_to "Auctions", admin_auctions_path
+            %li.divider-vertical
+            %li= link_to "Bids", admin_bids_list_index_path
+            %li.divider-vertical
+            %li= link_to "Users", admin_users_path
+            %li.divider-vertical
+            %li= link_to "Slider", admin_slider_items_path
+            %li.divider-vertical
+            %li= link_to "Banners", admin_banners_path
+            %li.divider-vertical
+            %li= link_to "Logo", admin_logos_path
+            %li.divider-vertical
+            %li= link_to "Links", admin_links_path
+            %li.divider-vertical
+            %li= link_to "Pages", admin_pages_path
+            %li.divider-vertical
+            %li= link_to "Menu entries", admin_menu_entries_path
+            %li.divider-vertical
+
+          %li= link_to "Profile", edit_user_registration_path
+          %li= link_to "Watch List", watch_list_index_path
+          %li.divider-vertical
+          %li= link_to "Account", account_index_path
+          %li.divider-vertical
+          %li
+            = link_to (content_tag(:i, "", class: 'icon-off icon-white') + "\nSign Out"), destroy_user_session_path, method: :delete
+
+.main_header
+  .logo
+    - unless @logo
+      %h1
+        %a{:href => "/"} Auctions Web Site
+    - else
+      = link_to image_tag(@logo.image.url(:thumb)), root_url
+
+  .banner
+    .banner_left
+      = @banner_one.text.html_safe if @banner_one.respond_to? :text
+    .banner_right
+      = form_tag simple_search_path, :method => :get, :name => "search", :class => "form-inline", :id => :homeSearch do |f|
+        = text_field_tag :search, @search_term
+        = submit_tag "Go!"
+      = link_to "Or try our Advanced Search", advanced_search_index_path
+      %br
+      = @banner_two.text.html_safe if @banner_two.respond_to? :text
+
+    - unless user_signed_in?
+      .login-button
+        = link_to image_tag('login-button.png'), new_user_session_path
+%nav
+  = link_to "Home", root_url
+  - if @menu_entry1.respond_to? :admin_page
+    %a{:href => "#{@menu_entry1.admin_page.nil?? '#' : page_path(@menu_entry1.admin_page)}"} #{@menu_entry1.title}
+  - if @menu_entry2.respond_to? :admin_page
+    %a{:href => "#{@menu_entry2.admin_page.nil?? '#' : page_path(@menu_entry2.admin_page)}"} #{@menu_entry2.title}
+  - if @menu_entry3.respond_to? :admin_page
+    %a{:href => "#{@menu_entry3.admin_page.nil?? '#' : page_path(@menu_entry3.admin_page)}"} #{@menu_entry3.title}
+  - if @menu_entry4.respond_to? :admin_page
+    %a{:href => "#{@menu_entry4.admin_page.nil?? '#' : page_path(@menu_entry4.admin_page)}"} #{@menu_entry4.title}
+  - if @menu_entry5.respond_to? :admin_page
+    %a{:href => "#{@menu_entry5.admin_page.nil?? '#' : page_path(@menu_entry5.admin_page)}"} #{@menu_entry5.title}
+  - if @menu_entry6.respond_to? :admin_page
+    %a{:href => "#{@menu_entry6.admin_page.nil?? '#' : page_path(@menu_entry6.admin_page)}"} #{@menu_entry6.title}
+
+  -#- unless user_signed_in?
+    -#= link_to "Register now", new_user_session_path, :class => 'red_text_menu'
+
+- unless @banner_under_menu.nil?
+  .banner_under_menu
+    = image_tag @banner_under_menu.banner.url(:medium)
+
+

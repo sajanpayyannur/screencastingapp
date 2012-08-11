@@ -1,0 +1,32 @@
+# == Schema Information
+#
+# Table name: messages
+#
+#  id               :integer          not null, primary key
+#  to               :string(255)
+#  from             :string(255)
+#  subject          :string(255)
+#  body             :text
+#  messageable_id   :integer
+#  messageable_type :string(255)
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  to: MyString
+  from: MyString
+  subject: MyString
+  body: MyString
+  messageable_id: 1
+  messageable_type: MyString
+
+two:
+  to: MyString
+  from: MyString
+  subject: MyString
+  body: MyString
+  messageable_id: 1
+  messageable_type: MyString

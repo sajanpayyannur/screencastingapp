@@ -1,0 +1,25 @@
+# == Schema Information
+#
+# Table name: bids
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer
+#  auction_id :integer
+#  value      :float
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  winner     :boolean          default(FALSE)
+#  active     :boolean          default(TRUE)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user: 
+  auction: 
+  value: 1.5
+
+two:
+  user: 
+  auction: 
+  value: 1.5

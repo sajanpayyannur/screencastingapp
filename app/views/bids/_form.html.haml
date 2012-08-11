@@ -1,0 +1,12 @@
+= simple_form_for @bid do |f|
+  -if @bid.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@bid.errors.count, "error")} prohibited this bid from being saved:"
+      %ul
+        - @bid.errors.full_messages.each do |msg|
+          %li= msg
+  = f.input :value, :as => :string, :input_html => {:class => 'auto-numeric'}, :label => "Enter an amount to bid"
+  = f.input :auction_id, as: :hidden
+  .actions
+    = f.submit 'Bid Now', :class => 'btn btn-primary'
+    -#= link_to 'Cancel', root_path, :class => 'btn'

@@ -1,0 +1,23 @@
+= simple_form_for @advanced_search, :url => advanced_search_index_path do |f|
+  = f.input :title
+  = f.input :lot_number
+  = f.association :state
+  = f.association :sale_title_types
+  = f.input :transmission, :collection => Auction.select(:transmission).uniq.map{|a| a.transmission}
+  = f.input :mileage, :collection => Mileage.all_hash
+  = f.input :body_color, :collection => Auction.select(:color).uniq.order(:color).map{|a| a.color}
+  = f.input :body_style, :collection => Auction.select(:body_style).uniq.order(:body_style).map{|a| a.body_style}
+  = f.input :drive_train, :collection => Auction.select(:drive_train).uniq.order(:drive_train).map{|a| a.drive_train}
+  = f.input :vehicle_condition, :collection => Auction.select(:vehicle_condition).uniq.order(:vehicle_condition).map{|a| a.vehicle_condition}
+  = f.input :make, :collection => @marks_list.map{|a| a.mark}
+  = f.input :model, :collection => @models_list.map{|a| a.model}
+  = f.input :year_from, :collection => (DateTime.current.year + 1).downto(1920), :selected => 2007
+  = f.input :year_to, :collection => (DateTime.current.year + 1).downto(2007), :selected => (DateTime.current.year + 1)
+  = f.input :make_an_offer_eligible
+  = f.input :buy_it_now
+  = f.input :closes_today
+  = f.input :closes_tomorrow
+
+  %br
+  %br
+  = submit_tag "Create search"

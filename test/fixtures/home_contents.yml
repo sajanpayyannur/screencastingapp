@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: home_contents
+#
+#  id         :integer          primary key
+#  left_text  :text
+#  right_text :text
+#  created_at :timestamp        not null
+#  updated_at :timestamp        not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  left_text: MyText
+  right_text: MyText
+
+two:
+  left_text: MyText
+  right_text: MyText

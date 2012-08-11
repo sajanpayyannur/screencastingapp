@@ -1,0 +1,21 @@
+%h1 Slider Items
+
+%table.table.table-bordered.table-striped
+  %tr
+    %th Title
+    %th Url
+    %th
+    %th
+    %th
+
+  - @admin_slider_items.each do |item|
+    %tr
+      %td= item.title
+      %td= item.url
+      %td= link_to 'Show', admin_slider_item_path(item)
+      %td= link_to 'Edit', edit_admin_slider_item_path(item)
+      %td= link_to 'Destroy', admin_slider_item_path(item), :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Slider Item', new_admin_slider_item_path

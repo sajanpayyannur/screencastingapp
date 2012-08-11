@@ -1,0 +1,16 @@
+%h1 Logo
+
+- unless @admin_logos.count > 0
+  %p Upload a logo to change the default Auctions Web Site header logo.
+- else
+  %p Delete the logo if you want the default Auctions Web Site header back.
+
+%table.table.table-bordered.table-striped
+  - @admin_logos.each do |admin_logo|
+    %tr
+      %td= image_tag admin_logo.image.url(:thumb)
+      %td= link_to 'Destroy', admin_logo, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Logo', new_admin_logo_path, class: 'btn'

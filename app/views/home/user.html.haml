@@ -1,0 +1,15 @@
+%h1 Auctions
+%p by #{@user.nickname}
+
+%ul.thumbnails
+  - @arts.each do |art|
+    %li.span4
+      .thumbnail
+        - if art.image.file?
+          = image_tag art.image.url(:medium)
+        - else
+          = image_tag('360x268.gif')
+
+        .caption
+          %h5= art.name
+

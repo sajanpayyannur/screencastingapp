@@ -1,0 +1,35 @@
+.well
+  .page-header
+    %h1 Users
+  .row
+    .span4
+      = link_to "Download CSV", users_list_csv_admin_users_path(:csv), :class => 'btn'
+      = link_to "Show highest bidder", show_highest_bidder_admin_users_path, :class => 'btn'
+  %br
+  .row
+    .span4
+      = form_tag admin_users_path, :method => :get, :class => 'form-search' do |f|
+        = text_field_tag :search
+        = submit_tag :search, :class => 'btn'
+%br
+%table.table.table-bordered.table-striped
+  %thead
+    %tr
+      %th Email
+      %th Name
+      %th Nickname
+      %th Bids
+      %th Winner Bids
+      %th Join Date
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.email
+        %td= user.name
+        %td= user.nickname
+        %td= user.bids.count
+        %td= user.winner_bids.count
+        %td= user.created_at.strftime("%D")
+        %td
+          =link_to content_tag(:i, "", class: 'icon-info-sign'), admin_user_path(user)
+          =link_to content_tag(:i, "", class: 'icon-pencil'), edit_admin_user_path(user)

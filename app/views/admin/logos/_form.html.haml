@@ -1,0 +1,14 @@
+= form_for @admin_logo do |f|
+  -if @admin_logo.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@admin_logo.errors.count, "error")} prohibited this admin_logo from being saved:"
+      %ul
+        - @admin_logo.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :image
+    = f.file_field :image
+  .actions
+    = f.submit 'Save', :class => 'btn btn-primary'
+    = link_to 'Back', admin_logos_path, :class => 'btn'

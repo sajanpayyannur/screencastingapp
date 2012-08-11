@@ -1,0 +1,8 @@
+%h1 Banner
+
+%p= image_tag @admin_banner.banner.url(:medium)
+
+%p= @admin_banner.link
+
+
+= link_to 'Back', admin_banners_path, :class => 'btn'

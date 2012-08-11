@@ -1,0 +1,25 @@
+// Place all the styles related to the Admin::Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+dl.dlshow{
+  margin: 10px;
+  dt, dd{display: block; margin: 5px; padding: 0;}
+  dt{
+    font-weight: bold;
+    margin: 10px 0 3px 0;
+    border: 1px solid #DDD;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #FBFBFB;
+    background-image: -moz-linear-gradient(top, white, #F6F6F6);
+    background-image: -ms-linear-gradient(top, white, #F6F6F6);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#F6F6F6));
+    background-image: -webkit-linear-gradient(top, white, #F6F6F6);
+    background-image: -o-linear-gradient(top, white, #F6F6F6);
+    background-image: linear-gradient(top, white, #F6F6F6);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f6f6f6', GradientType=0);
+    padding: 2px 0 2px 8px;
+  }
+}

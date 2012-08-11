@@ -1,0 +1,26 @@
+= form_for [:admin, @admin_banner] do |f|
+  -if @admin_banner.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@admin_banner.errors.count, "error")} prohibited this admin_page from being saved:"
+      %ul
+        - @admin_banner.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :banner
+    = f.file_field :banner
+
+  .field
+    = f.label :position
+    = f.select :position, Banner::POSITIONS
+    %ul 
+      %li header banner should be #{@admin_banner.header_dimensions}
+      %li under-menu banner should be #{@admin_banner.under_menu_dimensions}
+
+  .field
+    = f.label :link, "Link - leave it blank if you don't want a link on banner"
+    = f.text_field :link
+    %br
+  .actions
+    = f.submit 'Save', :class => 'btn btn-primary'
+    = link_to 'Back', admin_banners_path, :class => 'btn'

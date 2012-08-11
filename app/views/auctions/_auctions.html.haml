@@ -1,0 +1,23 @@
+=# link_to 'New Auction', new_auction_path, :class => 'btn btn-primary'
+
+%ul.thumbnails
+  - if @auctions.blank?
+    %h5 No Auctions available yet
+  - else
+    .row 
+      - @auctions.each do |auction|
+        %li.item
+          .thumbnail.clearfix{:class => cycle("left","right")}
+            - if auction.picture_url#if auction.image.file?
+              .image= link_to(image_tag(auction.picture_url), auction_path(auction))
+
+              =# link_to image_tag(auction.image.url(:medium)), auction.image.url(:large), title: auction.title, class: 'fancybox'
+            - else
+              = link_to image_tag('360x268.gif'), auction_path(auction)
+            .info
+              .title= link_to(auction.pretty_title, auction_path(auction.slug))
+              .date End Date: #{auction.end_date.strftime('%d/%m/%y %H:%M')}
+              - if auction.max_bid_value
+                .bid Actual bid: #{auction.max_bid_value}
+                =# link_to 'Edit', edit_auction_path(auction), :class => 'btn btn-primary'
+                =# link_to 'Delete', auction, :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-danger'

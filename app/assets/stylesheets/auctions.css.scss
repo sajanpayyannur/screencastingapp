@@ -1,0 +1,62 @@
+// Place all the styles related to the auctions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.buttons {
+  text-align: center;
+  margin: 5px 0;
+}
+
+ul.thumbs li {
+  display: block;
+  float: left;
+  margin: 9px;
+}
+
+
+
+.auctions-show {
+  #gallery {
+    position: relative;
+	width: 460px;
+	height: 349px;
+  }
+
+  .desc {
+    margin-left: 30px;
+    margin-top: 20px;
+    float: left;
+    width: 440px;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .bid-buttons {
+    float: right;
+	margin-right: 10px;
+	margin-top: 30px;
+  }
+
+  .image-wrapper img {
+    width: 460px;
+  }
+
+  div.loader {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-image: url('loader.gif');
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 460px;
+	height: 369px; /* This should be set to be at least the height of the largest image in the slideshow */
+  }
+
+  dl{
+    dd, dt{margin: 0; padding: 0;}
+    dt{ float: left; clear: both; margin-right: 5px; }
+    dd { margin-left: 5px; }
+  }
+}

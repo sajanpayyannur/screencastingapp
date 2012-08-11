@@ -1,0 +1,57 @@
+%h2 My Account
+
+%br
+=link_to "Upload Funds", new_payment_path, :class => 'btn'
+
+%br
+%br
+%table
+  %tbody
+    %tr
+      %td
+        %strong Available funds:
+      %td= number_to_currency current_user.available_balance
+    %tr
+      %td
+        %strong Locked funds:
+      %td= number_to_currency current_user.locked_balance
+
+%br
+
+%h2 Transactions
+
+.row
+  .span4.well
+    %h4.green Credits
+    %table.table
+      %thead
+        %tr
+          %th Date
+          %th Status
+          %th Value
+      %tbody
+        - current_user.credits.reverse.each do |transaction|
+          %tr
+            %td= l transaction.created_at, :format => :short
+            %td= transaction_status_tag transaction.transaction_status
+            %td= number_to_currency transaction.value
+  .span4.well
+    %h4.red Debits
+    %table.table
+      %thead
+        %tr
+          %th Date
+          %th Lot number
+          %th Status
+          %th Value
+      %tbody
+        - current_user.debits.reverse.each do |transaction|
+          %tr
+            %td= l transaction.created_at, :format => :short
+            - if transaction.transactionable.is_a? Bid
+              %td= transaction.transactionable.auction.lot_number rescue ''
+            - else
+              %td= ''
+            %td= transaction_status_tag transaction.transaction_status
+            %td= number_to_currency transaction.value
+

@@ -1,0 +1,21 @@
+%h1 Listing Links
+
+%table.table.table-bordered.table-striped
+  %tr
+    %th Url
+    %th Text
+    %th
+    %th
+    %th
+
+  - @admin_links.each do |admin_link|
+    %tr
+      %td= admin_link.url
+      %td= admin_link.text
+      %td= link_to 'Show', admin_link
+      %td= link_to 'Edit', edit_admin_link_path(admin_link)
+      %td= link_to 'Destroy', admin_link, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Link', new_admin_link_path

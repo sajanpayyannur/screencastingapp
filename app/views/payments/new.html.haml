@@ -1,0 +1,19 @@
+%h1 Upload funds to your account
+
+- if @payment.errors.any?
+  #error_explanation
+    %ul
+      - @payment.errors.full_messages.each do |msg|
+        %li= msg
+
+= simple_form_for @payment do |f|
+  = f.input :price, :as => :string, :input_html => {:class => 'auto-numeric'}
+  = f.input :first_name
+  = f.input :last_name
+  = f.input :card_number
+  = f.input :card_verification, as: :string
+  = f.date_select :card_expires_on, :discard_day => true,
+        :start_year => Date.today.year, :end_year => (Date.today.year + 10), :order => [:month, :year]
+
+  = f.button :submit
+

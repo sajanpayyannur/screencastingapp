@@ -1,0 +1,24 @@
+= will_paginate @auctions
+
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Title
+      %th Year
+      %th Picture
+      %th Enabled
+      %th Price
+      %th Max bid
+      %th Bids count
+    %tbody
+      - @auctions.each do |auction|
+        %tr
+          %td= auction.title
+          %td= auction.year
+          %td= image_tag auction.picture_url
+          %td= auction.enabled
+          %td= number_to_currency auction.price
+          %td= number_to_currency auction.max_bid_value
+          %td= auction.bids.count
+          %td= link_to content_tag(:i, "", class: 'icon-info-sign'), admin_auction_path(auction)
+= will_paginate @auctions
